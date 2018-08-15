@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<configuration status="OFF">
+	<properties>
+		<property name="LOG_HOME">./logs</property>
+		<property name="LOG_NAME">casdaemon</property>
+	</properties>
+	
+	<appenders>
+		<!-- 控制台日志 -->
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread][%file:%line] - %msg%n" />
+		</Console>
+		
+		<!-- 文件日志 -->
+		<RollingRandomAccessFile name="RollingFile" fileName="${LOG_HOME}/${LOG_NAME}.log"
+			filePattern="${LOG_HOME}/${LOG_NAME}.%d{yyyy-MM-dd}.log.gz">
+			<PatternLayout pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread][%file:%line] - %msg%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1" modulate="true" />
+			</Policies>
+		</RollingRandomAccessFile>
+		
+		<!-- 文件日志异步输出 -->
+		<Async name="Async" bufferSize="2048">
+			<appender-ref ref="RollingFile" /> 
+		</Async>
+	</appenders>
+		
+	<loggers>
+		<root level="DEBUG">
+			<appender-ref ref="RollingFile" />
+			<appender-ref ref="Console" />
+		</root>
+	</loggers>
+</configuration>  

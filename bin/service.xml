@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<service>
+	<!-- 单点登录数据库与应用数据库是否为分库模式, 如果是分库模式, 用户增、删、改必须同时自动调用SSO的用户服务 -->
+	<!-- true 分库  false 不分库 -->
+	<ssodbsharding>false</ssodbsharding>
+
+	<!-- 服务监控开关： true 打开    false 关闭 -->
+	<servicemonitor>false</servicemonitor>
+	
+	<!--  JDBC SQL监控开关： true 打开    false 关闭 -->
+	<jdbcmonitor>false</jdbcmonitor>
+	
+	<!-- 日志级别： DEBUG INFO ERROR -->
+	<loglevel>DEBUG</loglevel>
+	
+	<!-- 数据更新时是否备份标识：yes/no/config，yes为全部，no为全部不备份，config为按配置的表名备份 -->
+	<updatebackup>no</updatebackup>
+	
+	<!-- 配置哪些服务接口不需要token验证 -->
+	<notokenauth>
+		<!-- FSDP2.0框架定义的nosession action, 请勿修改 -->
+		<!-- 登录 -->
+		<serviceap name="/service/finedo/login/localauth"/>				
+	</notokenauth>
+	
+	<configuration>  
+  <system.web.extensions>
+  <scripting>
+  <webServices>
+  <jsonSerialization maxJsonLength="5000000000"/>
+  </webServices>
+  </scripting>
+  </system.web.extensions>
+</configuration>
+	
+</service>
